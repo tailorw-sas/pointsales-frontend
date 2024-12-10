@@ -1,0 +1,13 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - VITE_APP_BASE_URL=https://medinec-api.kynsoft.net
+      - AUTH_ORIGIN=http://localhost:3000
+      - AUTH_SECRET=yQoJM1XMPHcmkBVzejHG8xfnGiEAHhaMFWip920Wt7H2xSCt7dHiN
+      - VITE_APP_CLIENT_ID=client-front
+      - VITE_APP_CLIENT_SECRET=some-client-secret
