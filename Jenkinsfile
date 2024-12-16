@@ -44,10 +44,10 @@ pipeline {
                     env.SERVER_K3S_CREDENTIALS = k3sCredentials
 
                     echo 'Variables:'
-                    echo 'env.SISTEMA: ${env.SISTEMA}'
-                    echo 'env.GITHUB_REPO: ${env.GITHUB_REPO}'
-                    echo 'env.GIT_COMMIT: ${env.GIT_COMMIT}'
-                    echo 'env.GIT_TOKEN: ${env.GIT_TOKEN}'
+                    echo "env.SISTEMA: ${env.SISTEMA}"
+                    echo "env.GITHUB_REPO: ${env.GITHUB_REPO}"
+                    echo "env.GIT_COMMIT: ${env.GIT_COMMIT}"
+                    echo "env.GIT_TOKEN: ${env.GIT_TOKEN}"
                     def prInfo = pullrequests.getPullRequestInfoByGitCommit(env.SISTEMA, env.GITHUB_REPO, env.GIT_COMMIT, env.GIT_TOKEN)
                     env.PR_TITLE = prInfo.title
                     env.PR_AUTHOR = prInfo.author
