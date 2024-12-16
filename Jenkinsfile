@@ -36,14 +36,14 @@ pipeline {
                 script {   
                     def branch = env.ORIGIN_BRANCH_NAME.replace('origin/', '')
                     env.BRANCH_NAME = branch
-                    echo 'llego a env.BRANCH_NAME = branch'
 
                     def dockerImage = env.DOCKER_IMAGE_NAME.replace('version', env.BRANCH_NAME)
                     env.DOCKER_IMAGE = dockerImage
 
                     def k3sCredentials = env.K3S_CREDENTIALS.replace('env', env.BRANCH_NAME)
                     env.SERVER_K3S_CREDENTIALS = k3sCredentials
-
+                    echo 'llego a env.SERVER_K3S_CREDENTIALS = k3sCredentials'
+			
                     def prInfo = pullrequests.getPullRequestInfoByGitCommit(env.SISTEMA, env.GITHUB_REPO, env.GIT_COMMIT, env.GIT_TOKEN)
                     env.PR_TITLE = prInfo.title
                     env.PR_AUTHOR = prInfo.author
