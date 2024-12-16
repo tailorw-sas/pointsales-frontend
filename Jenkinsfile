@@ -36,6 +36,7 @@ pipeline {
                 script {   
                     def branch = env.ORIGIN_BRANCH_NAME.replace('origin/', '')
                     env.BRANCH_NAME = branch
+                    echo 'llego a env.BRANCH_NAME = branch'
 
                     def dockerImage = env.DOCKER_IMAGE_NAME.replace('version', env.BRANCH_NAME)
                     env.DOCKER_IMAGE = dockerImage
