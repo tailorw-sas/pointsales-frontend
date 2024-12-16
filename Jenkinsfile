@@ -42,12 +42,17 @@ pipeline {
 
                     def k3sCredentials = env.K3S_CREDENTIALS.replace('env', env.BRANCH_NAME)
                     env.SERVER_K3S_CREDENTIALS = k3sCredentials
-			
+
+                    echo 'Variables:'
+                    echo 'env.SISTEMA: ${env.SISTEMA}'
+                    echo 'env.GITHUB_REPO: ${env.GITHUB_REPO}'
+                    echo 'env.GIT_COMMIT: ${env.GIT_COMMIT}'
+                    echo 'env.GIT_TOKEN: ${env.GIT_TOKEN}'
                     def prInfo = pullrequests.getPullRequestInfoByGitCommit(env.SISTEMA, env.GITHUB_REPO, env.GIT_COMMIT, env.GIT_TOKEN)
                     env.PR_TITLE = prInfo.title
                     env.PR_AUTHOR = prInfo.author
                     env.EMAIL_AUTHOR = prInfo.authorEmail
-                    echo 'llego a env.EMAIL_AUTHOR = prInfo.authorEmail'
+                    
 					
                     if(env.BRANCH_NAME == 'dev'){
                         env.SERVER_K3S_URL = env.URL_DEV
