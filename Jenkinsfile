@@ -74,7 +74,7 @@ pipeline {
         stage ('Publish to Kubernetes') {
             steps {
                 withKubeConfig(credentialsId: "${SERVER_K3S_CREDENTIALS}", namespace: "${NAMESPACE}", restrictKubeConfigAccess: false, serverUrl: "${SERVER_K3S_URL}") {
-                    sh 'kubectl apply -f $YAML'
+                    sh 'kubectl apply -f kubernetes/$YAML'
                     //sh 'kubectl rollout restart deploy $DEPLOYMENT_NAME'
                 }
             }
