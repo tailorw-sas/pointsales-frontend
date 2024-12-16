@@ -48,12 +48,20 @@ pipeline {
                     echo "env.GITHUB_REPO: ${env.GITHUB_REPO}"
                     echo "env.GIT_COMMIT: ${env.GIT_COMMIT}"
                     echo "env.GIT_TOKEN: ${env.GIT_TOKEN}"
-                    def prInfo = pullrequests.getPullRequestInfoByGitCommit(env.SISTEMA, env.GITHUB_REPO, env.GIT_COMMIT, env.GIT_TOKEN)
-                    env.PR_TITLE = prInfo.title
-                    env.PR_AUTHOR = prInfo.author
-                    env.EMAIL_AUTHOR = prInfo.authorEmail
-                    
-					
+                    try{
+                        def prInfo = pullrequests.getPullRequestInfoByGitCommit(env.SISTEMA, env.GITHUB_REPO, env.GIT_COMMIT, env.GIT_TOKEN)
+                        env.PR_TITLE = prInfo.title
+                        env.PR_AUTHOR = prInfo.author
+                        env.EMAIL_AUTHOR = prInfo.authorEmail
+		    } catch (Exception e) {
+                        // Manejo del error
+                        echo "Error al obtener información del pull request: ${e.message}"
+                        echo "Stack trace: ${e}"
+                        env.PR_TITLE = "Unknown"
+                        env.PR_AUTHOR = "Unknown"
+                        env.EMAIL_AUTHOR = "admin@tailorw.com"
+                    }
+                    			
                     if(env.BRANCH_NAME == 'dev'){
                         env.SERVER_K3S_URL = env.URL_DEV
                         env.EMAIL_LIST = env.EMAIL_LIST_DEV_POINTSALES_FRONTEND
